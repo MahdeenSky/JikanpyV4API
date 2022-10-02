@@ -7,18 +7,16 @@ class JikanAPI:
     def __init__(self):
         self.url = 'https://api.jikan.moe/v4'
 
-    def searchAnimeTitles(self, anime_name):
+    def searchAnimeTitles(self, anime_name, limit=5):
         """
         Queries the Jikan API for a list of anime titles
-        cuz MAL API sucks ass
         """
-        search_result = r.get(f'{self.url}/anime?q={anime_name}').json()['data'][:5]
+        search_result = r.get(f'{self.url}/anime?q={anime_name}').json()['data'][:limit]
         return [anime['title'] for anime in search_result]
 
     def getAnimeIDByName(self, anime_name):
         """
         Queries the Jikan API for the anime id
-        cuz MAL API sucks
         """
         search_result = r.get(f'{self.url}/anime?q={anime_name}').json()['data'][:10]
         for anime in search_result:
@@ -29,7 +27,6 @@ class JikanAPI:
     def getAnimeByID(self, anime_id):
         """
         Queries the Jikan API for the anime using the anime id
-        cuz MAL API sucks
         """
         return r.get(f'{self.url}/anime/{anime_id}').json()
 
