@@ -31,7 +31,7 @@ class JikanAPI:
         req = r.get(f'{self.url}/anime/{anime_id}')
         if req.status_code == 429:
             raise Exception(req.json()['message'])
-        return req.json()
+        return req.json()['data']
 
 if __name__ == "__main__":
     jikan_api = JikanAPI()
